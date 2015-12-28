@@ -1,4 +1,4 @@
-# Spec Client Library
+# Spec Test Library
 
 A Spec test library dedicated to the Thicket language.
 
