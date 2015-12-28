@@ -1,0 +1,20 @@
+{
+    "name": "Spec",
+    "version": "1.0",
+    "location": "https://github.com/thicket-lang/thicket-library-spec",
+    "description":"Specification test engine",
+    "developers": [
+        {
+            "name": "D. Plaindoux",
+            "mail": "d.plaindoux@free.fr"
+        }
+    ],
+    "modules": [
+        "Spec.Core",
+        "Spec.Logger",
+        "Spec.Logger.Console"
+    ],
+    "requires":[
+        { "Core": "1.0" }
+    ]
+}
