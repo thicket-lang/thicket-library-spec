@@ -2,7 +2,7 @@
  * Thicket
  * https://github.com/d-plaindoux/thicket
  *
- * Copyright (c) 2015 Didier Plaindoux
+ * Copyright (c) 2015-2016 Didier Plaindoux
  * Licensed under the LGPL2 license.
  */
  
@@ -22,8 +22,8 @@ model TestContext {
 model Expect[a] {
     toBe       : a -> bool
     toBeIn     : Collection[a] -> bool
-    toBeAKey   : [b] Map[a b] -> bool
-    toBeAValue : [b] Map[b a] -> bool
+    toBeAKey   : [b] Map[a,b] -> bool
+    toBeAValue : [b] Map[b,a] -> bool
 }
 
 class expect[a] this:Comparable[a] {
