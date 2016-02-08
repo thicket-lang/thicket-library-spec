@@ -1,8 +1,52 @@
-# Spec Client Library
+# Spec Test Library
 
 A Spec test library dedicated to the Thicket language.
 
-## Modules compilation
+## Description / API
+
+```
+def simpleAssertions : TestLogger -> unit = logger -> {
+    description logger "Simple Assertion tests"
+        it "expect true toBe true" {
+            expect true toBe true
+        }
+        it "expect true not toBe false" {
+            expect true not toBe false
+        }
+        it "expect false toBe false" {
+            expect false toBe false
+        }
+        it "expect 1 not toBe 2" {
+           expect 1 not toBe 2
+        }
+        it "expect 1 not toBe (-1)" {
+           expect 1 not toBe (-1)
+        }
+        it "expect 1 toBe 1" {
+            expect 1 toBe 1
+        }
+        it "expect 1 toBeIn List[1]" {
+            expect 1 toBeIn $ List[1]
+        }
+        it "expect 1 toBeAKey Hashmap[1=>'a']" {
+            expect 1 toBeAKey $ Hashmap[1=>"a"]
+        }
+        it "expect 1 not toBeAKey Hashmap[2=>'a']" {
+            expect 1 not toBeAKey $ Hashmap[2=>"a"]
+        }
+        it "expect 'a' toBeAValue Hashmap[1=>'a']" {
+            expect "a" toBeAValue $ Hashmap[1=>"a"]
+        }
+        it "expect 'b' not toBeAValue Hashmap[2=>'a']" {
+            expect "b" not toBeAValue $ Hashmap[2=>"a"]
+        }  
+    done 
+}
+```
+
+## Build process
+
+### Modules
 
 ```sh
 > thicket compile -i <..>/thicket-library-core/bin -p Core -o obj -v `find src/main/thicket -name \*.tkt`
@@ -12,7 +56,7 @@ A Spec test library dedicated to the Thicket language.
 ...
 ```
 
-## Package construction
+### Package
 
 ```sh
 > thicket package -i obj/ -o bin/ -i src/main/js/ -v -s -n spec.pkt 
