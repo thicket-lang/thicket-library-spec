@@ -31,9 +31,9 @@ class expect[a] this:Comparable[a] {
     not : Expect[a]
 } {
     def not = 
-        new self with toBe = (a -> self toBe a not) 
-                      toBeIn = (a -> self toBeIn a not)
-                      toBeAKey = (a -> self toBeAKey a not)
+        new self with toBe       = (a -> self toBe a not) 
+                      toBeIn     = (a -> self toBeIn a not)
+                      toBeAKey   = (a -> self toBeAKey a not)
                       toBeAValue = (a -> self toBeAValue a not)               
     def toBe a = this == a
     def toBeIn c = c find (e -> this == e) present
@@ -44,6 +44,7 @@ class expect[a] this:Comparable[a] {
 class descriptionSpecs this:(TestContext,TestLogger) {
     it   : string -> bool -> descriptionSpecs
     done : unit
+    doneWithContext : TestContext
 } {
     def it s b =         
         when b then { 
@@ -58,9 +59,15 @@ class descriptionSpecs this:(TestContext,TestLogger) {
             } return $ descriptionSpecs context,this._2
         }
     
-    def done = 
+    def doneWithContext = 
         do { 
           this._2.terminate (this._1.success,this._1.failure)
+        } return this _1
+    
+    def done =
+        
+        do { 
+            self doneWithContext
         } return ()
         
 }
