@@ -16,7 +16,7 @@ import System.Runtime
 import Spec.Core
 import Spec.Logger.Console
 
-def specAssertions : TestLogger -> unit = l -> {
+def specAssertions : TestLogger -> TestContext = l -> {
     description l "Specification assertions"
         it "expect true toBe true == true" {
             expect true toBe true == true
@@ -69,21 +69,21 @@ def specAssertions : TestLogger -> unit = l -> {
     done 
 }
 
-def contextAssertions : TestLogger -> unit = l -> {
+def contextAssertions : TestLogger -> TestContext = l -> {
     description l "Specification assertions"
         it "expect (semething) being true produces one success" {
             description dumbLogger "Specification assertions"
                 it "produces true" {
                     true
                 }
-            doneWithContext success == 1
+            done success == 1
         }
         it "expect (something) being false produces one failure" {
             description dumbLogger "Specification assertions"
                 it "produces false" {
                     false
                 }
-            doneWithContext failure == 1
+            done failure == 1
         }
         it "expect (something) being false produces one failure and continue" {
             description dumbLogger "Specification assertions"
@@ -93,7 +93,7 @@ def contextAssertions : TestLogger -> unit = l -> {
                 it "produces true" {
                     true
                 }
-            doneWithContext success == 1
+            done success == 1
         }
     done 
 }

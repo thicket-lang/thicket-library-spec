@@ -30,11 +30,11 @@ class expect[a] this:Comparable[a] {
     with Expect[a]
     not : Expect[a]
 } {
-    def not = 
-        new self with toBe       = (a -> self toBe a not) 
-                      toBeIn     = (a -> self toBeIn a not)
-                      toBeAKey   = (a -> self toBeAKey a not)
-                      toBeAValue = (a -> self toBeAValue a not)               
+    def not = new self 
+              with toBe       = (a -> self toBe a not) 
+                   toBeIn     = (a -> self toBeIn a not)
+                   toBeAKey   = (a -> self toBeAKey a not)
+                   toBeAValue = (a -> self toBeAValue a not)               
     def toBe a = this == a
     def toBeIn c = c find (e -> this == e) present
     def toBeAKey m = self toBeIn $ m keys ()
@@ -43,33 +43,25 @@ class expect[a] this:Comparable[a] {
 
 class descriptionSpecs this:(TestContext,TestLogger) {
     it   : string -> bool -> descriptionSpecs
-    done : unit
-    doneWithContext : TestContext
+    done : TestContext
 } {
     def it s b =         
         when b then { 
-          let context = new this._1 with success=(this._1.success + 1) in
+          let context = new this._1 with success=(this._1.success++) in
             do { 
               this._2.success s
             } return $ descriptionSpecs context,this._2
         } else {
-          let context = new this._1 with failure=(this._1.failure + 1) in
+          let context = new this._1 with failure=(this._1.failure++) in
             do { 
               this._2.failure s 
             } return $ descriptionSpecs context,this._2
         }
     
-    def doneWithContext = 
+    def done = 
         do { 
           this._2.terminate (this._1.success,this._1.failure)
         } return this _1
-    
-    def done =
-        
-        do { 
-            self doneWithContext
-        } return ()
-        
 }
 
 def description : TestLogger -> string -> descriptionSpecs = l s -> {
