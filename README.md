@@ -46,23 +46,16 @@ def simpleAssertions : TestLogger -> unit = logger -> {
 
 ## Build process
 
-### Modules
+The following command  build, test and intall the package in the
+user local repository i.e. `~/.thicket/site` directory on unix
+based system.
 
-```sh
-> thicket compile -i <..>/thicket-library-core/bin -p Core -o obj -v `find src/main/thicket -name \*.tkt`
-[Spec.Logger] - Reading
-[Spec.Core] - Reading
-[Spec.Logger.Console] - Reading
-...
-```
+```sh 
+> ls
+LICENSE         bin         package-test.pkt    src
+README.md       obj         package.pkt
 
-### Package
-
-```sh
-> thicket package -i obj/ -o bin/ -i src/main/js/ -v -s -n spec.pkt 
-[Spec] - Reading definition
-[Spec.Core] - Module objcode added
-[Spec.Logger] - Module objcode added
+> $THICKET_HOME/bin/thicket build
 ...
 ```
 
