@@ -44,7 +44,7 @@ def simpleAssertions : TestLogger -> unit = logger -> {
 }
 ```
 
-## Build process
+## Project construction
 
 The following command  build, test and intall the package in the
 user local repository i.e. `~/.thicket/site` directory on unix
@@ -55,7 +55,7 @@ based system.
 LICENSE         bin         package-test.pkt    src
 README.md       obj         package.pkt
 
-> $THICKET_HOME/bin/thicket build
+> $THICKET_HOME/bin/thicket project install
 ...
 ```
 
